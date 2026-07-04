@@ -941,3 +941,99 @@ body {
   font-size: 24px;
   color: #38bdf8;
 }
+/* =========================
+   WELCOME LANDSCAPE FIT
+========================= */
+
+@media (max-height: 600px) and (orientation: landscape) {
+  .welcome-page {
+    padding: 8px 20px;
+  }
+
+  .welcome-card {
+    max-width: 720px;
+    padding: 18px 28px;
+    border-radius: 22px;
+  }
+
+  .welcome-logo {
+    font-size: 42px;
+    margin-bottom: 8px;
+  }
+
+  .welcome-badge {
+    font-size: 13px;
+    padding: 5px 14px;
+    margin-bottom: 8px;
+  }
+
+  .welcome-card h1 {
+    font-size: 38px;
+    letter-spacing: 2px;
+  }
+
+  .welcome-card h2 {
+    font-size: 20px;
+    margin: 4px 0 8px;
+  }
+
+  .welcome-card p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .space-hint {
+    font-size: 13px;
+    padding: 6px 14px;
+    margin-bottom: 10px;
+  }
+
+  .start-btn {
+    font-size: 16px;
+    padding: 9px 24px;
+  }
+}
+/* =========================
+   END PAGE LANDSCAPE FIT
+========================= */
+
+@media (max-height: 600px) and (orientation: landscape) {
+
+  .end-page {
+    width: 100vw !important;
+    height: 100vh !important;
+    padding: 10px 25px;
+    overflow: hidden;
+
+    justify-content: center;
+    align-items: center;
+  }
+
+  .end-icon {
+    font-size: 48px;
+    margin-bottom: 5px;
+  }
+
+  .end-page h1 {
+    font-size: 36px;
+    margin: 0 0 8px;
+  }
+
+  .end-page p {
+    font-size: 20px;
+    margin: 0 0 10px;
+  }
+
+  .comment-text {
+    padding: 9px 20px;
+
+    font-size: 18px;
+
+    border-radius: 12px;
+  }
+
+  .end-brand {
+    margin-top: 12px;
+    font-size: 17px;
+  }
+}
