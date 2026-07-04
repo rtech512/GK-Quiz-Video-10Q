@@ -889,3 +889,55 @@ body {
     padding: 14px 28px;
   }
 }
+/* =========================
+   END PAGE
+========================= */
+
+.end-page {
+  display: none;
+
+  width: 100%;
+  height: calc(100vh - 100px);
+
+  text-align: center;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.end-icon {
+  font-size: 85px;
+  margin-bottom: 15px;
+}
+
+.end-page h1 {
+  margin: 0 0 18px;
+  font-size: 55px;
+  color: #facc15;
+}
+
+.end-page p {
+  margin: 0 0 22px;
+  font-size: 30px;
+  color: #ffffff;
+}
+
+.comment-text {
+  padding: 16px 28px;
+
+  font-size: 26px;
+  font-weight: bold;
+
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
+
+  border: 2px solid rgba(34, 197, 94, 0.4);
+  border-radius: 15px;
+}
+
+.end-brand {
+  margin-top: 30px;
+  font-size: 24px;
+  color: #38bdf8;
+}

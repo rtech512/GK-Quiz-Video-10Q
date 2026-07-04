@@ -92,7 +92,20 @@ function nextQuestion() {
     currentQuestion++;
     loadQuestion();
   } else {
-    alert("🎉 सभी Questions Complete!");
+    document.getElementById("questionPage").style.display = "none";
+    document.getElementById("answerPage").style.display = "none";
+    document.querySelector(".controls").style.display = "none";
+
+    const endPage = document.getElementById("endPage");
+
+    endPage.style.display = "flex";
+    endPage.style.position = "fixed";
+    endPage.style.top = "0";
+    endPage.style.left = "0";
+    endPage.style.width = "100vw";
+    endPage.style.height = "100vh";
+    endPage.style.zIndex = "999";
+    endPage.style.background = "rgba(17, 24, 39, 0.96)";
   }
 }
 
