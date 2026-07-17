@@ -2,94 +2,303 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>GK Quiz by Rohit</title>
+
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
 
+  <!-- Animated Particles -->
   <div class="particles" id="particles"></div>
 
+  <!-- =========================
+       PREMIUM WELCOME PAGE
+  ========================= -->
+
   <div class="welcome-page" id="welcomePage">
+
     <div class="welcome-card">
-      <div class="welcome-logo">🧠</div>
-      <div class="welcome-badge">10 Interesting Questions</div>
-      <h1>GK QUIZ</h1>
-      <h2>By Rohit</h2>
-      <p>10 मजेदार सवाल • 8 सही करके दिखाओ 🧠🔥</p>
-      <div class="space-hint">Press SPACE to Start</div>
-      <button onclick="startQuiz()" class="start-btn">Start Quiz ▶</button>
+
+      <div class="welcome-icon">
+        🎉
+      </div>
+
+      <h1>Welcome to</h1>
+
+      <h2>
+        GK &amp; Current Affairs Quiz
+      </h2>
+
+      <h3>by Rohit</h3>
+
+      <div class="divider"></div>
+
+      <p class="welcome-subtitle">
+        🧠 Test Your Knowledge with
+        <strong>10 Exciting Questions</strong>
+      </p>
+
+      <p class="welcome-challenge">
+        🏆 Can You Score a Perfect
+        <strong>10/10?</strong> 🤔🔥
+      </p>
+
+      <button
+        type="button"
+        class="start-btn"
+        onclick="startQuiz()"
+      >
+        🚀 START QUIZ NOW
+      </button>
+
+      <p class="welcome-note">
+        ⭐ Press <strong>SPACE</strong>
+        or Click the Button to Begin
+      </p>
+
+      <div class="feature-list">
+        📚 General Knowledge
+        &nbsp;•&nbsp;
+        🌍 Current Affairs
+        &nbsp;•&nbsp;
+        ⚡ Learn While Playing
+      </div>
+
+      <p class="welcome-footer">
+        🍀 Best of Luck &amp; Enjoy the Quiz!
+      </p>
+
     </div>
+
   </div>
 
-  <div class="quiz-box" id="quizBox" style="display:none;">
+  <!-- =========================
+       QUIZ PAGE
+  ========================= -->
 
-    <div class="header">
-      <div class="logo">🧠 GK Quiz by Rohit</div>
-      <div class="count" id="count">Question 1/10</div>
-    </div>
+  <main
+    class="quiz-box"
+    id="quizBox"
+    style="display: none;"
+  >
 
-    <div class="question-page" id="questionPage">
-      <div class="question" id="question"></div>
+    <!-- Quiz Header -->
+    <header class="header">
 
-      <div class="timer-box" id="timerBox">
+      <div class="logo">
+        🧠 GK Quiz by Rohit
+      </div>
+
+      <div class="count" id="count">
+        Question 1/10
+      </div>
+
+    </header>
+
+    <!-- =========================
+         QUESTION PAGE
+    ========================= -->
+
+    <section
+      class="question-page"
+      id="questionPage"
+    >
+
+      <div
+        class="question"
+        id="question"
+      ></div>
+
+      <div
+        class="timer-box"
+        id="timerBox"
+        style="display: none;"
+      >
         <span id="timer"></span>
       </div>
 
       <div class="options">
-        <div class="option" id="optionA"></div>
-        <div class="option" id="optionB"></div>
-        <div class="option" id="optionC"></div>
-        <div class="option" id="optionD"></div>
-      </div>
-    </div>
 
-    <div class="answer-page" id="answerPage">
-      <div class="big-answer" id="answer"></div>
+        <div
+          class="option"
+          id="optionA"
+        ></div>
+
+        <div
+          class="option"
+          id="optionB"
+        ></div>
+
+        <div
+          class="option"
+          id="optionC"
+        ></div>
+
+        <div
+          class="option"
+          id="optionD"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <!-- =========================
+         ANSWER PAGE
+    ========================= -->
+
+    <section
+      class="answer-page"
+      id="answerPage"
+      style="display: none;"
+    >
+
+      <div
+        class="big-answer"
+        id="answer"
+      ></div>
 
       <div class="big-explanation">
-        <strong>📘 Explanation</strong>
+
+        <strong>
+          📘 Explanation
+        </strong>
+
         <p id="explanation"></p>
+
       </div>
 
       <div class="big-fact">
-        <strong>💡 Interesting Fact</strong>
+
+        <strong>
+          💡 Interesting Fact
+        </strong>
+
         <p id="fact"></p>
+
       </div>
-    </div>
+
+    </section>
+
+    <!-- =========================
+         CONTROLS
+    ========================= -->
 
     <div class="controls">
-      <button class="show-btn" onclick="startCountdown()">Show Answer</button>
-      <button class="next-btn" onclick="nextQuestion()">Next Question</button>
+
+      <button
+        type="button"
+        class="show-btn"
+        onclick="startCountdown()"
+      >
+        Show Answer
+      </button>
+
+      <button
+        type="button"
+        class="next-btn"
+        onclick="nextQuestion()"
+      >
+        Next Question
+      </button>
+
     </div>
-    <!-- End Page -->
-<div class="end-page" id="endPage">
-  <div class="end-icon">🏆</div>
 
-  <h1>Quiz Complete!</h1>
+  </main>
 
-  <p>आपके 10 में से कितने जवाब सही हुए?</p>
+  <!-- =========================
+       PREMIUM END PAGE
+  ========================= -->
 
-  <div class="comment-text">
-    अपना Score Comment में जरूर बताएं 👇
-  </div>
+  <section
+    class="end-page"
+    id="endPage"
+    style="display: none;"
+  >
 
-  <div class="end-brand">
-    🧠 GK Quiz by Rohit
-  </div>
-</div>
+    <div
+      class="confetti-container"
+      id="confettiContainer"
+    ></div>
 
-  </div>
+    <div class="result-card">
+
+      <div class="trophy-wrap">
+
+        <div class="trophy-glow"></div>
+
+        <div class="end-icon">
+          🏆
+        </div>
+
+      </div>
+
+      <div class="complete-badge">
+        QUIZ COMPLETED
+      </div>
+
+      <h1>बहुत बढ़िया!</h1>
+
+      <p class="result-message">
+        आपने सभी 10 सवाल पूरे कर लिए हैं।
+      </p>
+
+      <div class="score-circle">
+
+        <div class="score-circle-inner">
+
+          <strong>10</strong>
+
+          <span>Questions</span>
+
+        </div>
+
+      </div>
+
+      <div class="comment-text">
+
+        आपका Score कितना रहा?
+
+        <span>
+          Comment में जरूर बताएं 👇
+        </span>
+
+      </div>
+
+      <div class="end-brand">
+        🧠 GK Quiz by Rohit
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- JavaScript Files -->
 
   <script src="questions.js"></script>
   <script src="script.js"></script>
 
+  <!-- Service Worker -->
+
   <script>
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./sw.js");
+      window.addEventListener("load", function () {
+        navigator.serviceWorker
+          .register("./sw.js")
+          .catch(function (error) {
+            console.error(
+              "Service worker registration failed:",
+              error
+            );
+          });
       });
     }
   </script>

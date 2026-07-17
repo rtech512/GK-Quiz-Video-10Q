@@ -4,27 +4,48 @@ let timerRunning = false;
 let quizStarted = false;
 let justStarted = false;
 
-function startQuiz() {
-  document.getElementById("welcomePage").style.display = "none";
-  document.getElementById("quizBox").style.display = "block";
+/* =========================
+   START QUIZ
+========================= */
 
+function startQuiz() {
+  const welcomePage = document.getElementById("welcomePage");
+  const quizBox = document.getElementById("quizBox");
+  const endPage = document.getElementById("endPage");
+
+  if (welcomePage) welcomePage.style.display = "none";
+  if (quizBox) quizBox.style.display = "block";
+  if (endPage) endPage.style.display = "none";
+
+  currentQuestion = 0;
   quizStarted = true;
   justStarted = true;
+
+  loadQuestion();
 
   setTimeout(() => {
     justStarted = false;
   }, 500);
 }
 
+/* =========================
+   LOAD QUESTION
+========================= */
+
 function loadQuestion() {
   const q = questions[currentQuestion];
 
-  document.getElementById("questionPage").style.display = "block";
-  document.getElementById("answerPage").style.display = "none";
+  const questionPage = document.getElementById("questionPage");
+  const answerPage = document.getElementById("answerPage");
+  const timerBox = document.getElementById("timerBox");
+  const controls = document.querySelector(".controls");
+
+  questionPage.style.display = "block";
+  answerPage.style.display = "none";
+  controls.style.display = "flex";
 
   document.querySelectorAll(".option").forEach((option) => {
-    option.classList.remove("correct-answer");
-    option.classList.remove("wrong-fade");
+    option.classList.remove("correct-answer", "wrong-fade");
   });
 
   document.getElementById("count").innerText =
@@ -43,15 +64,27 @@ function loadQuestion() {
   document.getElementById("fact").innerText = q.fact;
 
   clearInterval(countdownInterval);
+
+  countdownInterval = null;
   timerRunning = false;
 
-  document.getElementById("timerBox").style.display = "none";
-  document.getElementById("timerBox").innerHTML = `<span id="timer"></span>`;
+  timerBox.style.display = "none";
+  timerBox.innerHTML = `<span id="timer"></span>`;
 }
+
+/* =========================
+   SHOW ANSWER
+========================= */
 
 function showAnswer() {
   const q = questions[currentQuestion];
 
+  clearInterval(countdownInterval);
+
+  countdownInterval = null;
+  timerRunning = false;
+
+  document.getElementById("timerBox").style.display = "none";
   document.getElementById("questionPage").style.display = "none";
   document.getElementById("answerPage").style.display = "block";
 
@@ -60,56 +93,135 @@ function showAnswer() {
   document.getElementById("fact").innerText = q.fact;
 }
 
+/* =========================
+   COUNTDOWN TIMER
+========================= */
+
 function startCountdown() {
-  if (!quizStarted) return;
-  if (justStarted) return;
-  if (timerRunning) return;
+  if (!quizStarted || justStarted || timerRunning) return;
 
   timerRunning = true;
+
   let timeLeft = 5;
 
   const timerBox = document.getElementById("timerBox");
+
   timerBox.style.display = "block";
   timerBox.innerHTML = `<span id="timer">${timeLeft}</span>`;
 
   countdownInterval = setInterval(() => {
     timeLeft--;
-    document.getElementById("timer").innerText = timeLeft;
+
+    const timer = document.getElementById("timer");
+
+    if (timer) {
+      timer.innerText = timeLeft;
+    }
 
     if (timeLeft <= 0) {
       clearInterval(countdownInterval);
+
+      countdownInterval = null;
       timerRunning = false;
+
       timerBox.style.display = "none";
+
       showAnswer();
     }
   }, 1000);
 }
 
+/* =========================
+   NEXT QUESTION
+========================= */
+
 function nextQuestion() {
   if (!quizStarted) return;
+
+  clearInterval(countdownInterval);
+
+  countdownInterval = null;
+  timerRunning = false;
 
   if (currentQuestion < questions.length - 1) {
     currentQuestion++;
     loadQuestion();
-  } else {
-    document.getElementById("questionPage").style.display = "none";
-    document.getElementById("answerPage").style.display = "none";
-    document.querySelector(".controls").style.display = "none";
+    return;
+  }
+function launchConfetti() {
+  const container =
+    document.getElementById("confettiContainer");
 
-    const endPage = document.getElementById("endPage");
+  if (!container) return;
 
-    endPage.style.display = "flex";
-    endPage.style.position = "fixed";
-    endPage.style.top = "0";
-    endPage.style.left = "0";
-    endPage.style.width = "100vw";
-    endPage.style.height = "100vh";
-    endPage.style.zIndex = "999";
-    endPage.style.background = "rgba(17, 24, 39, 0.96)";
+  container.innerHTML = "";
+
+  const colors = [
+    "#facc15",
+    "#22c55e",
+    "#38bdf8",
+    "#ec4899",
+    "#a855f7",
+    "#fb923c"
+  ];
+
+  for (let i = 0; i < 85; i++) {
+    const piece = document.createElement("span");
+
+    piece.className = "confetti-piece";
+
+    piece.style.left = `${Math.random() * 100}%`;
+
+    piece.style.background =
+      colors[Math.floor(Math.random() * colors.length)];
+
+    piece.style.animationDuration =
+      `${Math.random() * 3 + 3}s`;
+
+    piece.style.animationDelay =
+      `${Math.random() * 1.8}s`;
+
+    piece.style.transform =
+      `rotate(${Math.random() * 360}deg)`;
+
+    container.appendChild(piece);
   }
 }
+  showEndPage();
+}
 
-document.addEventListener("keydown", function (event) {
+/* =========================
+   END PAGE
+========================= */
+
+function showEndPage() {
+  document.getElementById("questionPage").style.display = "none";
+  document.getElementById("answerPage").style.display = "none";
+  document.getElementById("timerBox").style.display = "none";
+
+  const controls = document.querySelector(".controls");
+
+  if (controls) {
+    controls.style.display = "none";
+  }
+
+  const endPage = document.getElementById("endPage");
+
+  endPage.style.display = "flex";
+  endPage.style.position = "fixed";
+  endPage.style.inset = "0";
+  endPage.style.width = "100vw";
+  endPage.style.height = "100vh";
+  endPage.style.zIndex = "999";
+  endPage.style.background = "rgba(17, 24, 39, 0.94)";
+  launchConfetti();
+}
+
+/* =========================
+   KEYBOARD CONTROLS
+========================= */
+
+document.addEventListener("keydown", (event) => {
   if (event.code === "Space") {
     event.preventDefault();
 
@@ -126,28 +238,45 @@ document.addEventListener("keydown", function (event) {
   }
 });
 
-loadQuestion();
-createParticles();
+/* =========================
+   MOVING PARTICLES
+========================= */
 
 function createParticles() {
   const particleContainer = document.getElementById("particles");
-  if (!particleContainer) return;
+
+  if (!particleContainer) {
+    console.error("Particles container nahi mila.");
+    return;
+  }
 
   particleContainer.innerHTML = "";
 
-  for (let i = 0; i < 45; i++) {
+  for (let i = 0; i < 65; i++) {
     const particle = document.createElement("span");
-    particle.classList.add("particle");
 
-    particle.style.left = Math.random() * 100 + "%";
+    particle.className = "particle";
 
     const size = Math.random() * 4 + 2;
-    particle.style.width = size + "px";
-    particle.style.height = size + "px";
+    const duration = Math.random() * 14 + 9;
+    const delay = Math.random() * -20;
 
-    particle.style.animationDuration = Math.random() * 12 + 8 + "s";
-    particle.style.animationDelay = Math.random() * -20 + "s";
+    particle.style.left = Math.random() * 100 + "%";
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+
+    particle.style.animationDuration = `${duration}s`;
+    particle.style.animationDelay = `${delay}s`;
 
     particleContainer.appendChild(particle);
   }
 }
+
+/* =========================
+   INITIALIZE
+========================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadQuestion();
+  createParticles();
+});
